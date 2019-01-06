@@ -23,7 +23,7 @@ def count_words_by_tags(news_list):
 
     for tag, counter in counters.items():
         counters[tag] = Counter(
-            {word: count for word, count in counter.items() if count > 8}
+            {word: count for word, count in counter.items() if count > 12}
         )
     return counters
 
