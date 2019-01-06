@@ -20,22 +20,16 @@ class NewsFactory:
         result = []
         for line in string_list:
             t = line.split("\t")
+            body = t.pop()
+            t[-1] += " " + body
             t.reverse()
             n = News(*tuple(t))
-            n.head = self.stemmer.package_stemming(
-                self._regexp_space.sub(
-                    " ",
-                    self._regexp_clear.sub("", self._regexp_e.sub("е", n.head).lower()),
-                ).split(" ")
-            )
-            n.body = self.stemmer.package_stemming(
-                self._regexp_space.sub(
-                    " ",
-                    self._regexp_clear.sub("", self._regexp_e.sub("е", n.body).lower()),
-                ).split(" ")
-            )
+            n.body = self._regexp_space.sub(
+                " ",
+                self._regexp_clear.sub(" ", self._regexp_e.sub("е", n.body).lower()),
+            ).split(" ")
 
-            print(n.body)
+            n.body = self.stemmer.package_stemming([x for x in n.body if len(x) >= 3])
 
             # any additional clearing here
 
@@ -44,7 +38,6 @@ class NewsFactory:
 
 
 class News:
-    def __init__(self, body, head, tag=""):
-        self.head = head
+    def __init__(self, body, tag=""):
         self.body = body
         self.tag = tag

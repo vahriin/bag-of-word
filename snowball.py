@@ -16,7 +16,6 @@ class Snowball:
     _regexp_rv = re.compile(_vowel)
     _regexp_r1 = re.compile(_vowel + _consonant)
 
-    # Endings.
     _regexp_perfective_gerund = re.compile(
         r"(((?P<basis>[ая])(в|вши|вшись))|(ив|ивши|ившись|ыв|ывши|ывшись))$"
     )
@@ -129,8 +128,3 @@ class Snowball:
         if not match:
             _, word = self._cut(word, self._regexp_soft, rv_pos)
         return word
-
-
-s = Snowball()
-print(s.stemming("центробанков"))
-
