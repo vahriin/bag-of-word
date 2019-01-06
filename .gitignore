@@ -102,3 +102,6 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+news_output_example.txt
+news_test.txt
+news_train.txt
